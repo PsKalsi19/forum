@@ -5,7 +5,7 @@ import Card from '../../components/card/Card';
 const Home = () => {
     const { forumState: { forums,sortBy } } = useContext(ForumContext)
     const handleSort=()=>{
-        [...forums.posts].sort((a, b) => {
+       return [...forums.posts].sort((a, b) => {
                 if (sortBy === 'votes') {
                     return b.upvotes - a.upvotes;
                 } else {

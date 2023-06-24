@@ -6,7 +6,6 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const Post = () => {
     const location = useLocation()
-    console.log(location);
     const { state: post } = location
     return (
         <div>

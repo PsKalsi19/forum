@@ -20,9 +20,9 @@ const ForumProvider = ({ children }) => {
 
     const [forumState, setForumState] = useState({
         forums: forumData,
-        sortBy: ""
+        sortBy: "votes"
     })
-    const { forums, sortBy } = forumState
+    const { forums } = forumState
 
     const handleUpVote = (id) => {
         const data = forums.posts.map(ele => ele.postId === id ? ({ ...ele, upvotes: ele.upvotes + 1 }) : ele)
@@ -43,9 +43,6 @@ const ForumProvider = ({ children }) => {
 
     const handleSortBy = (type) => {
         setForumState({ ...forumState, sortBy: type })
-        console.log(forumState);
-        // const sortedPosts = 
-        // setForumState({ ...forumState, posts: sortedPosts });
     };
     return (
         <ForumContext.Provider value={{ forumState, setForumState, handleUpVote, handleDownVote, toggleBookMark, handleSortBy }}>
