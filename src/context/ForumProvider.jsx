@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext,  useState } from "react";
+import { createContext, useState } from "react";
 import forumData from "../db/forumData";
 
 // const forumReducer = (state, { type, payload }) => {
@@ -22,26 +22,33 @@ const ForumProvider = ({ children }) => {
         forums: forumData,
         sortBy: ""
     })
-    const {forums,sortBy}=forumState
+    const { forums, sortBy } = forumState
 
-    const handleUpVote=(id)=>{
-      const data=  forums.posts.map(ele=>ele.postId===id?({...ele,upvotes:ele.upvotes+1}):ele)
-      const updatedForumData = { ...forums, posts: data };
-      setForumState({...forumState,forums:updatedForumData})
-    }
-
-    const handleDownVote=(id)=>{
-      const data=  forums.posts.map(ele=>ele.postId===id?({...ele,downvotes:ele.downvotes+1}):ele)
-      const updatedForumData = { ...forums, posts: data };
-      setForumState({...forumState,forums:updatedForumData})
-    }
-    const toggleBookMark=(id)=>{
-        const data=  forums.posts.map(ele=>ele.postId===id?({...ele,isBookmarked:!ele.isBookmarked}):ele)
+    const handleUpVote = (id) => {
+        const data = forums.posts.map(ele => ele.postId === id ? ({ ...ele, upvotes: ele.upvotes + 1 }) : ele)
         const updatedForumData = { ...forums, posts: data };
-        setForumState({...forumState,forums:updatedForumData})  
+        setForumState({ ...forumState, forums: updatedForumData })
     }
+
+    const handleDownVote = (id) => {
+        const data = forums.posts.map(ele => ele.postId === id ? ({ ...ele, downvotes: ele.downvotes + 1 }) : ele)
+        const updatedForumData = { ...forums, posts: data };
+        setForumState({ ...forumState, forums: updatedForumData })
+    }
+    const toggleBookMark = (id) => {
+        const data = forums.posts.map(ele => ele.postId === id ? ({ ...ele, isBookmarked: !ele.isBookmarked }) : ele)
+        const updatedForumData = { ...forums, posts: data };
+        setForumState({ ...forumState, forums: updatedForumData })
+    }
+
+    const handleSortBy = (type) => {
+        setForumState({ ...forumState, sortBy: type })
+        console.log(forumState);
+        // const sortedPosts = 
+        // setForumState({ ...forumState, posts: sortedPosts });
+    };
     return (
-        <ForumContext.Provider value={{ forumState, setForumState,handleUpVote,handleDownVote,toggleBookMark }}>
+        <ForumContext.Provider value={{ forumState, setForumState, handleUpVote, handleDownVote, toggleBookMark, handleSortBy }}>
             {children}
         </ForumContext.Provider>
     );
